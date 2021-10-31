@@ -1,0 +1,19 @@
+<mat-toolbar color="primary">
+  <div class="nav-tittle">
+    <mat-icon>grade</mat-icon>
+    <h1>Despensa R3</h1>
+  </div>
+  <nav>
+    <a mat-button *ngFor="let link of links" routerLink="{{ link.path }}">
+      <mat-icon
+        matBadge="{{ cartLenght }}"
+        matBadgeColor="warn"
+        *ngIf="link.isIcon; else text"
+      >
+        {{ link.desc }}
+      </mat-icon>
+      <ng-template #text> {{ link.desc }} </ng-template>
+    </a>
+  </nav>
+  <button (click)="getCartLenght()">Cart</button>
+</mat-toolbar>
