@@ -1,1 +1,99 @@
-<p>contact works!</p>
+<mat-card class="form__container">
+  <h1>Atención al Cliente</h1>
+  <form [formGroup]="formData" (ngSubmit)="submitForm()" class="form">
+    <mat-form-field appearance="fill" class="space">
+      <mat-label>Nombre</mat-label>
+      <input matInput formControlName="name" placeholder="Nombre" type="text" />
+      <mat-error *ngIf="formData.get('name')?.hasError('required')">
+        Este campo es obligatorio</mat-error
+      >
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="space">
+      <mat-label>Email</mat-label>
+      <input
+        matInput
+        formControlName="email"
+        email="email"
+        placeholder="Email"
+        type="email"
+      />
+      <mat-error *ngIf="formData.get('email')?.hasError('required')">
+        Este campo es obligatorio</mat-error
+      >
+      <mat-error *ngIf="formData.get('email')?.hasError('email')">
+        Ingrese una dirección de correo electrónico válida</mat-error
+      >
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="space">
+      <mat-label>Teléfono (opcional)</mat-label>
+      <input
+        matInput
+        formControlName="phone"
+        placeholder="Teléfono"
+        type="number"
+      />
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="space">
+      <mat-label>Mensaje</mat-label>
+      <textarea
+        matInput
+        formControlName="message"
+        placeholder="Describir mensaje..."
+        type="text"
+      ></textarea>
+      <mat-error *ngIf="formData.get('message')?.hasError('required')">
+        Este campo es obligatorio</mat-error
+      >
+
+      <mat-error *ngIf="formData.get('message')?.hasError('minlength')">
+        Ingrese como minimo 20 caracteres</mat-error
+      >
+
+      <mat-error *ngIf="formData.get('message')?.hasError('maxlength')">
+        Ingrese menos de 350 caracteres</mat-error
+      >
+
+      <mat-hint align="end"
+        >{{ formData.get("message")?.value?.length }} / 350</mat-hint
+      >
+    </mat-form-field>
+
+    <mat-radio-group
+      class="form__radio"
+      formControlName="genre"
+      appearance="fill"
+      color="primary"
+      aria-label="Seleccione una opción"
+    >
+      <mat-radio-button value="masc">Masculino</mat-radio-button>
+      <mat-radio-button value="fem">Femenino</mat-radio-button>
+      <mat-radio-button value="otro">Otro</mat-radio-button>
+    </mat-radio-group>
+
+    <div class="form__checkbox">
+      <label for="newsletter"> <h4>Suscribirse al Newsletter</h4></label>
+      <mat-checkbox
+        formControlName="newsletter"
+        type="checkbox"
+        color="primary"
+        id="newsletter"
+      >
+      </mat-checkbox>
+    </div>
+
+    <div class="form__buttons">
+      <button mat-raised-button color="primary" type="submit">Enviar</button>
+      <button
+        mat-raised-button
+        color="secundary"
+        (click)="resetForm()"
+        type="button"
+      >
+        Resetear Formulario
+      </button>
+    </div>
+  </form>
+</mat-card>
